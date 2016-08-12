@@ -40,6 +40,7 @@
 				$parse_title = parse_title($title);
 				$author = $xpath->query('itunes:author', $item)->item(0)->nodeValue;
 				$duration = $xpath->query('itunes:duration', $item)->item(0)->nodeValue;
+				$link = $xpath->query('guid', $item)->item(0)->nodeValue;
 
 				// Enclosure tag
 				$enclosure = $xpath->query('enclosure', $item)->item(0);
@@ -55,7 +56,8 @@
 					'duration' => gmdate("H:i:s", $duration),
 					'source' => $video_source,
 					'length' => formatBytes($video_length),
-					'type' => $video_type
+					'type' => $video_type,
+					'link' => $link
 				);
 			}
 
