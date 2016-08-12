@@ -1,0 +1,11 @@
+.panel-root {
+    margin-top: 20px;
+}
+
+.mag-20 {
+    margin-top: 20px;
+}
+
+[ng-cloak] {
+    display: none;
+}

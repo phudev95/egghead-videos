@@ -1,34 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="egghead-videos-app" ng-controller="AppController">
 <head>
-    <title>Test</title>
+    <title>Egghead get videos</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/main.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <form id="subForm">
-                    <div class="form-group">
-                        <label for="sub_title">Tên filesub</label>
-                        <input type="text" class="form-control" id="sub_title" placeholder="Sub Video 1">
+    <div class="row" style="padding-left: 300px;padding-right: 300px;">
+        <div class="panel panel-primary panel-root">
+            <div class="panel-heading">
+                <h3 class="panel-title">Egghead get videos</h3>
+            </div>
+            <div class="panel-body">
+                <!-- Form -->
+                <form class="form-horizontal" name="egghead_form" novalidate ng-submit="egghead_form.$valid && handle()">
+                    <div class="form-group" ng-class="{'has-error': egghead_form.rss_link.$invalid && egghead_form.$submitted}">
+                        <label class="control-label col-sm-2" for="rss_link">RSS Link:</label>
+                        <div class="col-sm-10">
+                            <input type="text" ng-model="data.rss_link" ng-pattern="url_regex" name="rss_link" class="form-control" id="rss_link" placeholder="Enter RSS Link" required>
+                            <span class="help-block" ng-cloak ng-show="egghead_form.rss_link.$invalid && egghead_form.$submitted">Please fill out RSS Link</span>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="sub_content">Nội dung sub</label>
-                        <textarea name="content" id="sub_content" cols="30" rows="10" class="form-control">{"a":1}</textarea>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default" ng-bind="btn_submit">Handle</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                    <a class="btn btn-success" id="download" download="" style="display: none">Download</a>
-                    <a class="btn btn-warning" id="clean">Clean</a>
                 </form>
+
+                <!-- Results -->
+                <table class="table table-bordered mag-20" ng-if="results.length" ng-cloak>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Duration</th>
+                        <th>Author</th>
+                        <th>Length</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>Sample Name1</td>
+                        <td>Address 1</td>
+                        <td>12</td>
+                        <td>Male</td>
+                        <td>M1</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+
     <!-- SCRIPT -->
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/underscore/underscore-min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="static/js/main.js"></script>
 </body>
 </html>
