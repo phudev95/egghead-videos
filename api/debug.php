@@ -26,29 +26,32 @@
 
     $course_title = $doc->getElementsByTagName( "title" )->item(0)->nodeValue;
 
-	$results = [
+	$results = array(
 		'title' => str_replace('egghead.io course feed: ', '', $course_title),
-		'items' => []
-	];
+		'items' => array()
+	);
+
 	foreach ($items as $item) {
 		$title = $xpath->query('title', $item)->item(0)->nodeValue;
+		$parse_title = parse_title($title);
 		$author = $xpath->query('itunes:author', $item)->item(0)->nodeValue;
 		$duration = $xpath->query('itunes:duration', $item)->item(0)->nodeValue;
 
 		// Enclosure tag
 		$enclosure = $xpath->query('enclosure', $item)->item(0);
 		$video_source = $enclosure->attributes->getNamedItem('url')->value;
-		$video_length = $enclosure->attributes->getNamedItem('length')->value;
+		$video_length = (int) $enclosure->attributes->getNamedItem('length')->value;
 		$video_type = $enclosure->attributes->getNamedItem('type')->value;
 
 		// Push item to results array
 		$results['items'][] = array (
-			'title' => $title,
+			'title' => $parse_title['title'],
+			'category' => $parse_title['category'],
 			'author' => $author,
-			'duration' => $duration,
-			'video_source' => $video_source,
-			'video_length' => $video_length,
-			'video_type' => $video_type
+			'duration' => gmdate("H:i:s", $duration),
+			'source' => $video_source,
+			'length' => formatBytes($video_length),
+			'type' => $video_type
 		);
 	}
 

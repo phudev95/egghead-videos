@@ -42,6 +42,34 @@ if(!function_exists('log_data')){
     }
 }
 
+if (!function_exists('parse_title')) {
+	function parse_title ($str = '') {
+		$split = explode('-', $str);
+		$result = array ('title' => $str, 'category' => 'Undefined');
+
+		if (count($split) == 2) {
+			$result['title'] = trim($split[1]);
+			$result['category'] = trim($split[0]);
+		}
+
+		return $result;
+    }
+}
+
+if(!function_exists('formatBytes')) {
+	function formatBytes ($size, $precision = 2) {
+		$result = 0;
+
+		if (is_numeric($size) && $size > 0){
+			$base = log($size, 1024);
+			$suffixes = array('', 'K', 'M', 'G', 'T');
+			$result = round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
+		}
+
+        return $result;
+	}
+}
+
 if(!function_exists('throwRequestError')){
     function throwRequestError($browser){
         if(!empty($browser->errors)){
