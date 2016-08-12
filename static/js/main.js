@@ -3,7 +3,7 @@ var app = angular.module('egghead-videos-app', []);
 app.controller('AppController', function ($scope, $http) {
     $scope.btn_submit = 'Submit';
     $scope.data = {
-        rss_link: 'https://egghead.io/courses/practical-git-for-everyday-professional-use/course_feed?user_email=phudev95%40gmail.com&user_token=61d065de-76e8-4c3a-aa81-6eaf26068de4'
+        rss_link: ''
     };
     $scope.url_regex = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
     $scope.results = [];
@@ -12,6 +12,7 @@ app.controller('AppController', function ($scope, $http) {
      * Handle rss link
      */
     $scope.submit = function () {
+        $scope.panel_title = '';
         $scope.btn_submit = 'Submitting...';
         $scope.results = [];
 
@@ -19,6 +20,7 @@ app.controller('AppController', function ($scope, $http) {
         $http.post('./api/get_videos.php', {rss_link: $scope.data.rss_link})
             .success(function (res) {
                 if (res.status && !_.isEmpty(res.data)) {
+                    $scope.panel_title = res.data.title + ' (' + res.data.items.length + ' videos)';
                     $scope.results = res;
                     $scope.btn_submit = 'Submit';
                 }
