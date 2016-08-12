@@ -11,11 +11,11 @@
     <div class="row" style="padding-left: 300px;padding-right: 300px;">
         <div class="panel panel-primary panel-root">
             <div class="panel-heading">
-                <h3 class="panel-title">Egghead get videos</h3>
+                <h3 class="panel-title">{{ results.data.title || 'Tool get videos' }}</h3>
             </div>
             <div class="panel-body">
                 <!-- Form -->
-                <form class="form-horizontal" name="egghead_form" novalidate ng-submit="egghead_form.$valid && handle()">
+                <form class="form-horizontal" name="egghead_form" novalidate ng-submit="egghead_form.$valid && submit()">
                     <div class="form-group" ng-class="{'has-error': egghead_form.rss_link.$invalid && egghead_form.$submitted}">
                         <label class="control-label col-sm-2" for="rss_link">RSS Link:</label>
                         <div class="col-sm-10">
@@ -25,27 +25,30 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" ng-bind="btn_submit">Handle</button>
+                            <button type="submit" class="btn btn-default" ng-bind="btn_submit">Submit</button>
                         </div>
                     </div>
                 </form>
 
                 <!-- Results -->
-                <table class="table table-bordered mag-20" ng-if="results.length" ng-cloak>
+                <table class="table table-bordered mag-20" ng-if="results.data.items.length" ng-cloak>
                     <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Duration</th>
-                        <th>Author</th>
-                        <th>Length</th>
-                        <th>Action</th>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Category</th>
+                        <th class="text-center">Duration</th>
+                        <th class="text-center">Author</th>
+                        <th class="text-center">Length</th>
+                        <th class="text-center">Action</th>
                     </tr>
-                    <tr>
-                        <td>Sample Name1</td>
-                        <td>Address 1</td>
-                        <td>12</td>
-                        <td>Male</td>
-                        <td>M1</td>
+                    <tr ng-repeat="item in results.data.items track by $index">
+                        <td class="text-center">{{ $index + 1 }}</td>
+                        <td><a ng-href="{{item.link}}" target="_blank">{{ item.title }}</a></td>
+                        <td><a ng-href="https://egghead.io/technologies/{{item.category}}" target="_blank">{{ item.category }}</a></td>
+                        <td>{{ item.duration }}</td>
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.length }}</td>
+                        <td><a ng-href="{{item.source}}" download="{{ item.source }}" title="Download -> {{ item.title }}">Download</a></td>
                     </tr>
                 </table>
             </div>
