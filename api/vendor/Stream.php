@@ -6,9 +6,10 @@
 		protected $unit = 512;
 
 		/**
+		 * Response to client with streamline download
 		 * @param array $parameters
 		 */
-		public function stream_download ($parameters = array()) {
+		protected function stream_download ($parameters = array()) {
 			$filesize = $parameters['size'];
 			$filename = $this->convert_name($parameters['filename']);
 			$link = str_replace(" ", "%20", $parameters['url']);
@@ -175,6 +176,11 @@
 			exit;
 		}
 
+		/**
+		 * Init stream download
+		 * @param string $url
+		 * @param string $name
+		 */
 		public function download ($url = '', $name = '') {
 			if (!$url) {
 				sleep(15);

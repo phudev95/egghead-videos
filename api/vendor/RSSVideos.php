@@ -60,7 +60,6 @@
 						'category' => $parse_title['category'],
 						'author' => $author,
 						'duration' => gmdate("H:i:s", $duration),
-						//'source' => get_stream_link(2, $parse_title['title'], $video_source),
 						'source' => $video_source,
 						'length' => formatBytes($video_length),
 						'type' => $video_type,
@@ -79,6 +78,7 @@
 		 * Exec
 		 * @param string $rss_link
 		 * @return array
+		 * @throws Exception
 		 */
 		public function exec ($rss_link='') {
 			if (!empty($rss_link)) {
@@ -117,7 +117,7 @@
 				return $data;
 			}
 			else {
-				throwRequestError('RSS link is empty!');
+				throw new Exception('RSS link is empty!');
 			}
 		}
 
@@ -126,7 +126,7 @@
 		 * @param string $html
 		 * @return array
 		 */
-		public function get_order_of_courses ($html=''){
+		protected function get_order_of_courses ($html=''){
 			//$path = dirname(__FILE__) . '\\' . 'data.html';
 			//$html = file_get_contents($path);
 			$lesson_list = cut_str($html, 'id="lesson-list"', 'class="table-responsive"');

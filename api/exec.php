@@ -4,13 +4,6 @@
 	require_once 'vendor/RSSVideos.php';
 
 	$post_data = parse_post_data();
-	$data = array('status' => false, 'msg' => '');
-
-	//// DEBUG
-//	$post_data = array(
-//		'rss_link' => 'https://egghead.io/courses/practical-git-for-everyday-professional-use/course_feed?user_email=phudev95%40gmail.com&user_token=61d065de-76e8-4c3a-aa81-6eaf26068de4'
-//	);
-
 	$result = array();
 	$start = microtime(true);
 
