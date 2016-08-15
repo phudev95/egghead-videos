@@ -17,7 +17,7 @@ app.controller('AppController', function ($scope, $http) {
         $scope.results = [];
 
         // Request to API
-        $http.post('./api/get_videos.php', {rss_link: $scope.data.rss_link})
+        $http.post('./api/exec.php', {rss_link: $scope.data.rss_link})
             .success(function (res) {
                 if (res.status && !_.isEmpty(res.data)) {
                     $scope.panel_title = res.data.title + ' (' + res.data.items.length + ' videos)';
