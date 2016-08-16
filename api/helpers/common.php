@@ -62,19 +62,30 @@
 
 	if (!function_exists('parse_title')) {
 		function parse_title ($str = '') {
-			$split = explode('-', $str);
 			$result = array (
 				'title' => $str,
 				'category' => 'Undefined'
 			);
 
-			if (count($split) == 2) {
-				$result['title'] = trim($split[1]);
-				$result['category'] = trim($split[0]);
+			preg_match("/^([^-]+)-(.*)$/is", $str, $matches);
+			if (count($matches) === 3) {
+				$result['title'] = trim($matches[2]);
+				$result['category'] = trim($matches[1]);
 			}
 
 			return $result;
 		}
+	}
+
+	if (!function_exists('clean_query_utm')) {
+		/**
+		 * Clean query parameters on URL like: ?utm_source=blabla&utm_medium=blabla&utm_campaign=blabla
+		 * @param string $url
+		 * @return mixed
+		 */
+		function clean_query_utm ($url = ''){
+			return preg_replace('/[?]utm_source=.*/','', $url);
+	    }
 	}
 
 	if (!function_exists('formatBytes')) {

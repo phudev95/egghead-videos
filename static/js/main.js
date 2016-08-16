@@ -3,10 +3,19 @@ var app = angular.module('egghead-videos-app', []);
 app.controller('AppController', function ($scope, $http) {
     $scope.btn_submit = 'Submit';
     $scope.data = {
-        rss_link: ''
+        rss_link: '',
+        only_dload: true
     };
     $scope.url_regex = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
     $scope.results = [];
+
+    /**
+     * Add isEmpty method to Scope
+     * @param obj
+     */
+    $scope.isEmpty = function (obj) {
+        return _.isEmpty(obj);
+    };
 
     /**
      * Handle rss link

@@ -37,7 +37,7 @@
 
 				$temp = array(
 					'title' => str_replace('egghead.io course feed: ', '', $course_title),
-					'link' => $course_link,
+					'link' => clean_query_utm($course_link),
 					'items' => array()
 				);
 
