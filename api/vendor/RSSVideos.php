@@ -70,7 +70,7 @@
 				return $temp;
 			}
 			else {
-				throwRequestError('XML in valid!');
+				throwRequestError('XML invalid!');
 			}
 		}
 
@@ -127,8 +127,6 @@
 		 * @return array
 		 */
 		protected function get_order_of_courses ($html=''){
-			//$path = dirname(__FILE__) . '\\' . 'data.html';
-			//$html = file_get_contents($path);
 			$lesson_list = cut_str($html, 'id="lesson-list"', 'class="table-responsive"');
 			$lesson_order_list = array();
 
