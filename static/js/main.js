@@ -29,7 +29,7 @@ app.controller('AppController', function ($scope, $http) {
         $http.post('./api/exec.php', {rss_link: $scope.data.rss_link})
             .success(function (res) {
                 if (res.status && !_.isEmpty(res.data)) {
-                    $scope.panel_title = res.data.title + ' (' + res.data.items.length + ' videos)';
+                    $scope.panel_title = res.data.title + ' (<b>' + res.data.items.length + '</b> videos - <b>'+ res.time_elapsed_secs +'</b> seconds)';
                     $scope.results = res;
                     $scope.btn_submit = 'Submit';
                 }

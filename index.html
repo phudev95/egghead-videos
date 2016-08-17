@@ -13,7 +13,9 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <span ng-if="isEmpty(results.data)">Tool get videos</span>
-                    <a ng-if="!isEmpty(results.data)" ng-href="{{ results.data.link }}" target="_blank">{{ panel_title }}</a>
+                    <a ng-if="!isEmpty(results.data)" ng-href="{{ results.data.link }}" target="_blank" ng-cloak>
+                        {{ results.data.title }} (<b>{{ results.data.items.length }}</b> videos and processed for <b>{{  results.time_elapsed_secs }}</b> seconds )
+                    </a>
                 </h3>
             </div>
             <div class="panel-body">
