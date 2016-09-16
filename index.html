@@ -46,7 +46,6 @@
                     <tr>
                         <th class="text-center">No.</th>
                         <th class="text-center">Title</th>
-                        <th class="text-center">Category</th>
                         <th class="text-center">Duration</th>
                         <th class="text-center">Author</th>
                         <th class="text-center">Length</th>
@@ -57,10 +56,6 @@
                         <td>
                             <span ng-if="data.only_dload">{{ item.title }}</span>
                             <a ng-if="!data.only_dload" ng-href="{{item.link}}" target="_blank">{{ item.title }}</a>
-                        </td>
-                        <td>
-                            <span ng-if="data.only_dload">{{ item.category }}</span>
-                            <a ng-if="!data.only_dload" ng-href="https://egghead.io/technologies/{{item.category}}" target="_blank">{{ item.category }}</a>
                         </td>
                         <td>{{ item.duration }}</td>
                         <td>{{ item.author }}</td>

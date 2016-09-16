@@ -43,7 +43,6 @@
 
 				foreach ($items as $item) {
 					$title = $xpath->query('title', $item)->item(0)->nodeValue;
-					$parse_title = parse_title($title);
 					$author = $xpath->query('itunes:author', $item)->item(0)->nodeValue;
 					$duration = $xpath->query('itunes:duration', $item)->item(0)->nodeValue;
 					$link = $xpath->query('guid', $item)->item(0)->nodeValue;
@@ -56,8 +55,7 @@
 
 					// Push item to results array
 					$temp['items'][$link] = array (
-						'title' => $parse_title['title'],
-						'category' => $parse_title['category'],
+						'title' => $title,
 						'author' => $author,
 						'duration' => gmdate("H:i:s", $duration),
 						'source' => $video_source,
